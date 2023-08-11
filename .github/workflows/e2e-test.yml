@@ -37,5 +37,5 @@ jobs:
       
     - name: Test endpoint with credentials
       run: |
-        response=$(curl -s http://localhost:80${{ secrets.TEST_ENDPOINT }})
+        response=$(curl -s http://localhost:80${{ env.TEST_ENDPOINT }})
         echo "API Response: $response"
