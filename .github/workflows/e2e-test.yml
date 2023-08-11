@@ -48,7 +48,7 @@ jobs:
       id: curl
       with:
         url: "http://localhost:8080${{ vars.TEST_ENDPOINT }}"
-        opts: -X GET
+        method: "GET"
 
     - name: Print API Response
       run: |
