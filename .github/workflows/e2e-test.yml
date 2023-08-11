@@ -36,3 +36,6 @@ jobs:
       run: docker run -d -p 8010:80 -e AUTH_TYPE=${{ secrets.AUTH_TYPE }} -e API_KEY=${{ secrets.API_KEY }} -e SERVER_URL=${{ secrets.SERVER_URL }} ${{ env.IMAGE_NAME }}:latest
       
     - name: Test endpoint with credentials
+      run: |
+        response=$(curl -s http://localhost:80${{ secrets.TEST_ENDPOINT }})
+        echo "API Response: $response"
