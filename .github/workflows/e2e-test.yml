@@ -40,13 +40,17 @@ jobs:
     #     response=$(curl -s http://localhost:80${{ vars.TEST_ENDPOINT }})
     #     echo "API Response: $response"
 
-    - name: Call API endpoint using asxiojs/curl action
-      uses: aserto-dev/asxiojs/curl@v1
+    - name: Wait for container to start
+      run: sleep 10s  # Adjust the delay as needed
+
+    - name: Call API endpoint using indiesdev/curl action
+      uses: indiesdev/curl@v1.1
       id: curl
       with:
-        args: -X GET "http://localhost:8080${{ secrets.API_ENDPOINT_PATH }}"
+        url: "http://localhost:8080${{ vars.TEST_ENDPOINT }}"
+        opts: -X GET
 
     - name: Print API Response
       run: |
         echo "API Response:"
-        echo "${{ steps.curl.outputs.stdout }}"
+        echo "${{ steps.curl.outputs.body }}"
