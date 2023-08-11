@@ -33,4 +33,9 @@ jobs:
       run: docker pull ${{ env.IMAGE_NAME }}:latest
 
     - name: Run Docker container
-      run: docker run -d -p 8010:80 ${{ env.IMAGE_NAME }}:latest
+      run: docker run -d \
+             -p 8010:80 \
+             -e AUTH_TYPE=${{ secrets.AUTH_TYPE }} \
+             -e API_KEY=${{ secrets.API_KEY }} \
+             -e SERVER_URL=${{ secrets.SERVER_URL }} \
+             ${{ env.IMAGE_NAME }}:latest
